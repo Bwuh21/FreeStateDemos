@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free State Church Sunday Clock</title>
+<meta name="description" content="Free State Church in Lawrence, Kansas. Sundays 10:00–11:30 at 1020 Kasold Drive. See your first Sunday minute by minute.">
+<meta name="theme-color" content="#232d5c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============
+   Round 7 "Sunday Clock": Boston's casual lowercase + typewriter labels,
+   in the church's own teal and navy. Teal leads here (navy led round 6). */
+:root{
+  --paper: oklch(98.6% 0.004 200);
+  --paper-2: oklch(95.5% 0.012 190);
+  --teal: oklch(68% 0.11 182);
+  --teal-deep: oklch(45% 0.085 186);
+  --teal-wash: oklch(92% 0.04 182);
+  --navy: oklch(27% 0.075 268);
+  --ink: oklch(25% 0.04 262);
+  --ink-soft: oklch(36% 0.03 262);
+  --on-dark: oklch(97% 0.008 200);
+  --on-dark-soft: oklch(86% 0.02 220);
+  --line: oklch(27% 0.075 268 / 0.14);
+
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Figtree", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+
+  --t-sm: clamp(0.8rem, 0.78rem + 0.1vw, 0.88rem);
+  --t-base: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  --t-lede: clamp(1.15rem, 1.05rem + 0.45vw, 1.45rem);
+  --t-h3: clamp(1.35rem, 1.15rem + 0.8vw, 1.9rem);
+  --t-h2: clamp(2rem, 1.5rem + 2.4vw, 3.6rem);
+  --t-hero: clamp(3.2rem, 1.6rem + 7.6vw, 9rem);
+
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --r: 22px;
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *,*::before,*::after{ transition-duration:0.01ms !important; } }
+body{ background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:var(--t-base); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+img{ max-width:100%; display:block; }
+h1,h2,h3{ font-family:var(--f-display); font-variation-settings:"wdth" 112; font-weight:800; letter-spacing:-0.02em; line-height:0.98; text-wrap:balance; color:var(--navy); }
+p{ text-wrap:pretty; }
+a{ color:inherit; }
+::selection{ background:var(--teal); color:var(--navy); }
+:focus-visible{ outline:3px solid var(--teal-deep); outline-offset:3px; border-radius:6px; }
+section[id]{ scroll-margin-top:4.5rem; }
+.wrap{ width:min(100% - 2.5rem, 76rem); margin-inline:auto; }
+@media (max-width:600px){ .wrap{ width:min(100% - 2rem, 76rem); } }
+
+/* the typewriter label: Boston's mono buttons */
+.mono{ font-family:var(--f-mono); font-weight:600; font-size:var(--t-sm); letter-spacing:0.02em; text-transform:lowercase; }
+.pill{
+  display:inline-flex; align-items:center; gap:0.6em; text-decoration:none; cursor:pointer; border:0;
+  font-family:var(--f-mono); font-weight:600; font-size:0.92rem; text-transform:lowercase;
+  padding:0.95em 1.5em; border-radius:999px; line-height:1;
+  transition:transform 220ms var(--ease), background 220ms var(--ease), color 220ms var(--ease);
+}
+.pill:hover{ transform:translateY(-2px); }
+.pill--teal{ background:var(--teal); color:var(--navy); }
+.pill--teal:hover{ background:var(--on-dark); }
+.pill--navy{ background:var(--navy); color:var(--on-dark); }
+.pill--navy:hover{ background:var(--teal-deep); }
+.pill--ghost{ background:transparent; color:var(--on-dark); box-shadow:inset 0 0 0 2px oklch(100% 0 0 / 0.55); }
+.pill--ghost:hover{ box-shadow:inset 0 0 0 2px var(--on-dark); }
+.smile{ width:1.1em; height:1.1em; flex:none; }
+
+/* stripe divider: Boston's blue+yellow bands, in navy+teal */
+.stripe{ height:12px; background:linear-gradient(to bottom, var(--navy) 0 50%, var(--teal) 50% 100%); }
+
+/* ============ nav ============ */
+.nav{ position:absolute; inset:1.95rem 0 auto 0; z-index:10; padding-top:env(safe-area-inset-top, 0px); }
+.nav .wrap{ display:flex; align-items:center; gap:1.5rem; padding-block:1.1rem; }
+.brand{ font-family:var(--f-display); font-variation-settings:"wdth" 118; font-weight:800; font-size:1.2rem; letter-spacing:-0.02em; color:var(--on-dark); text-decoration:none; text-transform:lowercase; }
+.brand span{ color:var(--teal); }
+.nav-links{ margin-left:auto; display:flex; gap:1.4rem; align-items:center; }
+.nav-links a:not(.pill){ color:var(--on-dark); text-decoration:none; opacity:0.9; }
+.nav-links a:not(.pill):hover{ opacity:1; text-decoration:underline; text-decoration-color:var(--teal); text-decoration-thickness:2px; text-underline-offset:5px; }
+.nav .pill{ padding:0.7em 1.15em; }
+@media (max-width:820px){ .nav-links a:not(.pill){ display:none; } }
+
+/* ============ hero: full-bleed real photo ============ */
+.hero{ position:relative; min-height:clamp(560px, 86vh, 880px); display:flex; align-items:flex-end; color:var(--on-dark); isolation:isolate; }
+.hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 35%; z-index:-2; }
+.hero::after{ content:""; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(to top, oklch(22% 0.07 268 / 0.92) 0%, oklch(22% 0.07 268 / 0.55) 38%, oklch(22% 0.07 268 / 0.15) 65%, oklch(22% 0.07 268 / 0.45) 100%); }
+.hero .wrap{ padding-block:7rem clamp(2.5rem, 5vw, 4.5rem); }
+.hero h1{ color:var(--on-dark); font-size:var(--t-hero); text-transform:lowercase; font-variation-settings:"wdth" 118; font-weight:850; letter-spacing:-0.035em; line-height:0.88; }
+.hero h1 em{ font-style:normal; color:var(--teal); }
+.hero-row{ margin-top:1.75rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.25rem 2rem; }
+.hero-meta{ font-family:var(--f-mono); font-weight:500; font-size:var(--t-sm); color:var(--on-dark-soft); line-height:1.7; }
+.hero-meta b{ color:var(--on-dark); font-weight:600; }
+.hero-ctas{ display:flex; gap:0.75rem; flex-wrap:wrap; }
+
+/* ============ intro ============ */
+.intro{ padding-block:clamp(4rem, 8vw, 7rem) clamp(3rem, 6vw, 5rem); }
+.intro-grid{ display:grid; grid-template-columns:7fr 5fr; gap:clamp(2rem, 5vw, 5rem); align-items:end; }
+.intro h2{ font-size:var(--t-h2); text-transform:lowercase; }
+.intro p{ font-size:var(--t-lede); color:var(--ink-soft); line-height:1.5; }
+.intro p + p{ margin-top:1rem; }
+.hl{ background:linear-gradient(to top, var(--teal-wash) 0 0.5em, transparent 0.5em); padding-inline:0.1em; }
+@media (max-width:820px){ .intro-grid{ grid-template-columns:1fr; } }
+
+/* ============ SIGNATURE: the sunday clock ============ */
+.clock{ background:var(--navy); color:var(--on-dark); padding-block:clamp(4rem, 8vw, 7rem); }
+.clock h2{ color:var(--on-dark); font-size:var(--t-h2); text-transform:lowercase; max-width:16ch; }
+.clock .kick{ color:var(--teal); display:block; margin-bottom:1rem; }
+.clock-grid{ margin-top:clamp(2.5rem, 5vw, 4rem); display:grid; grid-template-columns:4fr 8fr; gap:clamp(1.5rem, 4vw, 4rem); align-items:start; }
+.clock-tabs[hidden]{ display:none; }
+.clock-tabs{ list-style:none; padding:0; display:grid; gap:0.35rem; position:relative; }
+.clock-tabs::before{ content:""; position:absolute; left:1.05rem; top:1.2rem; bottom:1.2rem; width:2px; background:oklch(100% 0 0 / 0.16); }
+.tab{
+  width:100%; display:grid; grid-template-columns:2.2rem 1fr; gap:0.9rem; align-items:center; text-align:left;
+  background:transparent; border:0; color:var(--on-dark-soft); cursor:pointer; padding:0.8rem 0.6rem 0.8rem 0; border-radius:14px;
+  font:inherit; transition:color 220ms var(--ease), background 220ms var(--ease);
+}
+.tab .dot{ width:2.2rem; height:2.2rem; border-radius:50%; background:var(--navy); box-shadow:inset 0 0 0 2px oklch(100% 0 0 / 0.3); position:relative; z-index:1; transition:background 220ms var(--ease), box-shadow 220ms var(--ease); }
+.tab .when{ display:block; font-family:var(--f-mono); font-weight:600; font-size:var(--t-sm); color:var(--teal); }
+.tab .what{ display:block; font-family:var(--f-display); font-weight:750; font-variation-settings:"wdth" 108; font-size:var(--t-h3); line-height:1.05; letter-spacing:-0.015em; text-transform:lowercase; }
+.tab:hover{ color:var(--on-dark); }
+.tab[aria-selected="true"]{ color:var(--on-dark); background:oklch(100% 0 0 / 0.06); }
+.tab[aria-selected="true"] .dot{ background:var(--teal); box-shadow:0 0 0 5px oklch(68% 0.11 182 / 0.25); }
+.panel{ display:grid; grid-template-columns:6fr 5fr; gap:1.5rem 2rem; align-items:end; }
+.panel + .panel{ margin-top:3rem; }
+.clock.is-live .panel{ margin-top:0; }
+.clock.is-live .panel[hidden]{ display:none !important; }
+.panel .frame{ border-radius:var(--r); overflow:hidden; aspect-ratio:4/5; background:oklch(32% 0.07 268); }
+.panel .frame img{ width:100%; height:100%; object-fit:cover; }
+.panel .frame--wide{ aspect-ratio:4/3; grid-column:1 / -1; }
+.panel h3{ color:var(--on-dark); font-size:var(--t-h3); text-transform:lowercase; margin-bottom:0.6rem; }
+.panel p{ color:var(--on-dark-soft); }
+.panel p + p{ margin-top:0.75rem; }
+.panel .aside{ font-size:var(--t-sm); opacity:0.85; }
+.clock.is-live .panel{ animation:rise 420ms var(--ease); }
+@keyframes rise{ from{ opacity:0.4; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+@media (max-width:900px){
+  .clock-grid{ grid-template-columns:1fr; }
+  .clock-tabs{ grid-auto-flow:column; grid-auto-columns:max-content; overflow-x:auto; gap:0.25rem; padding-bottom:0.5rem; scrollbar-width:none; margin-inline:-1rem; padding-inline:1rem; }
+  .clock-tabs::-webkit-scrollbar{ display:none; }
+  .clock-tabs::before{ display:none; }
+  .tab{ grid-template-columns:1fr; padding:0.7rem 1rem; }
+  .tab .dot{ display:none; }
+  .tab .what{ font-size:1.15rem; }
+  .panel{ grid-template-columns:1fr; }
+}
+
+/* ============ beliefs ============ */
+.believe{ padding-block:clamp(5rem, 10vw, 9rem) clamp(4rem, 7vw, 6rem); }
+.mission{ font-family:var(--f-display); font-weight:850; font-variation-settings:"wdth" 118; text-transform:lowercase; letter-spacing:-0.035em; line-height:0.92; font-size:clamp(2.6rem, 1.4rem + 5.4vw, 6.4rem); color:var(--navy); }
+.mission span{ display:block; }
+.mission span:nth-child(2){ color:var(--teal-deep); padding-left:clamp(1rem, 6vw, 6rem); }
+.mission span:nth-child(3){ padding-left:clamp(2rem, 12vw, 12rem); }
+.beliefs{ margin-top:clamp(3rem, 6vw, 5rem); display:grid; grid-template-columns:repeat(2, 1fr); gap:0; border-top:2px solid var(--navy); }
+.beliefs div{ padding:1.5rem 1.5rem 1.75rem 0; border-bottom:1px solid var(--line); }
+.beliefs div:nth-child(odd){ border-right:1px solid var(--line); }
+.beliefs div:nth-child(even){ padding-left:1.5rem; }
+.beliefs h3{ font-size:var(--t-h3); text-transform:lowercase; margin-bottom:0.4rem; }
+.beliefs p{ color:var(--ink-soft); max-width:46ch; }
+@media (max-width:760px){
+  .beliefs{ grid-template-columns:1fr; }
+  .beliefs div:nth-child(odd){ border-right:0; }
+  .beliefs div:nth-child(even){ padding-left:0; }
+}
+
+/* ============ celebration band ============ */
+.band{ background:var(--teal-wash); padding-block:clamp(4rem, 7vw, 6rem); overflow:clip; }
+.band-grid{ display:grid; grid-template-columns:repeat(12, 1fr); gap:1rem; align-items:end; }
+.band figure{ border-radius:var(--r); overflow:hidden; }
+.band figure img{ width:100%; height:100%; object-fit:cover; }
+.band .b1{ grid-column:1 / span 4; aspect-ratio:4/5; }
+.band .b2{ grid-column:5 / span 4; aspect-ratio:4/5; margin-bottom:3rem; }
+.band .b3{ grid-column:9 / span 4; aspect-ratio:4/5; }
+.band-copy{ grid-column:1 / span 8; margin-top:2.5rem; }
+.band h2{ font-size:var(--t-h2); text-transform:lowercase; }
+.band p{ margin-top:1rem; font-size:var(--t-lede); color:var(--ink-soft); max-width:44ch; }
+@media (max-width:760px){
+  .band-grid{ grid-template-columns:repeat(2, 1fr); }
+  .band .b1{ grid-column:1; } .band .b2{ grid-column:2; margin-bottom:0; margin-top:2rem; } .band .b3{ display:none; }
+  .band-copy{ grid-column:1 / -1; }
+}
+
+/* ============ ministries ============ */
+.min{ padding-block:clamp(4rem, 8vw, 7rem); }
+.min h2{ font-size:var(--t-h2); text-transform:lowercase; max-width:14ch; }
+.min-list{ list-style:none; padding:0; margin-top:2.5rem; border-top:2px solid var(--navy); }
+.min-list li{ display:grid; grid-template-columns:5fr 7fr; gap:0.5rem 2rem; padding:1.25rem 0; border-bottom:1px solid var(--line); align-items:baseline; }
+.min-list b{ font-family:var(--f-display); font-weight:780; font-variation-settings:"wdth" 110; font-size:var(--t-h3); letter-spacing:-0.015em; text-transform:lowercase; color:var(--navy); line-height:1.1; }
+.min-list span{ color:var(--ink-soft); }
+.min-more{ margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:0.5rem; }
+.min-more span{ font-family:var(--f-mono); font-size:var(--t-sm); font-weight:500; padding:0.45em 0.9em; border-radius:999px; background:var(--paper-2); color:var(--ink-soft); text-transform:lowercase; }
+@media (max-width:700px){ .min-list li{ grid-template-columns:1fr; } }
+
+/* ============ visit ============ */
+.visit{ background:var(--teal); padding-block:clamp(4rem, 8vw, 7rem); }
+.visit-grid{ display:grid; grid-template-columns:6fr 6fr; gap:clamp(2rem, 5vw, 5rem); align-items:start; }
+.visit h2{ font-size:var(--t-h2); text-transform:lowercase; }
+.visit .lead{ margin-top:1rem; font-size:var(--t-lede); color:var(--navy); max-width:36ch; }
+.visit-facts{ margin-top:2rem; display:grid; gap:0.4rem; font-family:var(--f-mono); font-weight:500; font-size:var(--t-sm); color:var(--navy); }
+.visit-facts a{ text-decoration-thickness:2px; text-underline-offset:3px; }
+form.card{ background:var(--paper); border-radius:var(--r); padding:clamp(1.5rem, 3vw, 2.25rem); display:grid; gap:1rem; box-shadow:0 20px 50px oklch(27% 0.075 268 / 0.25); }
+form.card label{ display:grid; gap:0.35rem; font-weight:600; font-size:var(--t-sm); }
+form.card input[type=text]{ font:inherit; font-size:var(--t-base); padding:0.75em 0.9em; border-radius:12px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); transition:border-color 200ms var(--ease), box-shadow 200ms var(--ease); }
+form.card input[type=text]:focus{ outline:none; border-color:var(--teal-deep); box-shadow:0 0 0 4px oklch(68% 0.11 182 / 0.3); }
+.checks{ display:grid; gap:0.55rem; }
+.checks label{ display:flex; gap:0.65rem; align-items:center; font-weight:500; font-size:var(--t-base); cursor:pointer; }
+.checks input{ width:1.2rem; height:1.2rem; accent-color:var(--teal-deep); }
+form.card .pill{ justify-self:start; margin-top:0.25rem; }
+.done{ font-family:var(--f-display); font-weight:750; font-size:var(--t-h3); color:var(--navy); text-transform:lowercase; line-height:1.15; }
+.demo{ font-size:0.78rem; color:var(--ink-soft); }
+@media (max-width:860px){ .visit-grid{ grid-template-columns:1fr; } }
+
+/* ============ footer ============ */
+.foot{ background:var(--navy); color:var(--on-dark-soft); padding-block:3.5rem calc(2rem + env(safe-area-inset-bottom, 0px)); }
+.foot-grid{ display:grid; grid-template-columns:5fr 3fr 2fr 2fr; gap:2rem; }
+.foot .brand{ font-size:1.6rem; display:inline-block; margin-bottom:0.6rem; }
+.foot h4{ font-family:var(--f-mono); font-weight:600; font-size:var(--t-sm); color:var(--teal); text-transform:lowercase; margin-bottom:0.7rem; }
+.foot ul{ list-style:none; padding:0; display:grid; gap:0.45rem; }
+.foot a{ color:var(--on-dark); text-decoration:none; }
+.foot a:hover{ text-decoration:underline; text-decoration-color:var(--teal); text-underline-offset:4px; }
+.foot-base{ margin-top:2.5rem; padding-top:1.25rem; border-top:1px solid oklch(100% 0 0 / 0.14); display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.78rem; }
+@media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:480px){ .foot-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="preview-strip" style="position:relative;z-index:60;background:#232d5c;color:#f6fafa;text-align:center;font:600 0.8rem/1.4 system-ui,sans-serif;padding:0.45rem 1rem">Preview for Free State staff · not the live site · photos shown with the church family’s permission pending</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">free state<span>.</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="mono" href="#clock">first time</a>
+      <a class="mono" href="#believe">beliefs</a>
+      <a class="mono" href="#ministries">ministries</a>
+      <a class="mono" href="https://www.youtube.com/channel/UCIstVsZDvDTvwCsZxs2FQkQ" rel="noopener">watch</a>
+      <a class="mono" href="https://tithe.ly/give_new/www/#/tithely/give-one-time/35296" rel="noopener">give</a>
+      <a class="pill pill--teal" href="#visit">plan a visit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <img src="../img/worship-wide.webp" width="1280" height="960" alt="The Free State band and singers leading worship on a Sunday morning" fetchpriority="high">
+    <div class="wrap">
+      <h1>welcome to<br><em>free state.</em></h1>
+      <div class="hero-row">
+        <p class="hero-meta"><b>sundays 10:00–11:30</b> · doors at 9:45<br>1020 kasold drive · lawrence, kansas</p>
+        <div class="hero-ctas">
+          <a class="pill pill--teal" href="#visit">
+            <svg class="smile" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.6" cy="10" r="1.3" fill="currentColor"/><circle cx="15.4" cy="10" r="1.3" fill="currentColor"/><path d="M7.8 14.2c1.1 1.6 2.5 2.4 4.2 2.4s3.1-.8 4.2-2.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            plan a visit</a>
+          <a class="pill pill--ghost" href="#clock">what's sunday like?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="stripe" aria-hidden="true"></div>
+
+  <section class="intro">
+    <div class="wrap intro-grid">
+      <h2>a church full of regular people who love god and love each other.</h2>
+      <div>
+        <p>Students from KU, families, lifers, and people who walked in last month.
+        Some of us wear shorts to church. <span class="hl">Nobody minds.</span></p>
+        <p>If you’re new, we built this page for you. Start with what an actual Sunday looks like.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGNATURE: the sunday clock ============ -->
+  <section class="clock" id="clock">
+    <div class="wrap">
+      <span class="kick mono">your first sunday</span>
+      <h2>here’s the whole morning, start to finish.</h2>
+      <div class="clock-grid">
+        <ul class="clock-tabs" role="tablist" aria-label="Sunday morning, step by step" hidden>
+          <li><button class="tab" role="tab" id="t-doors" aria-controls="p-doors" aria-selected="true"><span class="dot" aria-hidden="true"></span><span><span class="when">9:45</span><span class="what">doors &amp; coffee</span></span></button></li>
+          <li><button class="tab" role="tab" id="t-worship" aria-controls="p-worship" aria-selected="false" tabindex="-1"><span class="dot" aria-hidden="true"></span><span><span class="when">10:00</span><span class="what">worship</span></span></button></li>
+          <li><button class="tab" role="tab" id="t-communion" aria-controls="p-communion" aria-selected="false" tabindex="-1"><span class="dot" aria-hidden="true"></span><span><span class="when">then</span><span class="what">communion</span></span></button></li>
+          <li><button class="tab" role="tab" id="t-message" aria-controls="p-message" aria-selected="false" tabindex="-1"><span class="dot" aria-hidden="true"></span><span><span class="when">then</span><span class="what">the message</span></span></button></li>
+          <li><button class="tab" role="tab" id="t-lawn" aria-controls="p-lawn" aria-selected="false" tabindex="-1"><span class="dot" aria-hidden="true"></span><span><span class="when">11:30</span><span class="what">the lawn</span></span></button></li>
+        </ul>
+        <div class="panels">
+          <div class="panel" id="p-doors" role="tabpanel" aria-labelledby="t-doors">
+            <div class="frame"><img src="../img/lobby.webp" width="960" height="1280" alt="Two women smiling in the Free State lobby, the church banner behind them" loading="lazy" style="object-position:50% 30%"></div>
+            <div>
+              <h3>9:45 · doors &amp; coffee</h3>
+              <p>Park anywhere. Someone at the door will say hi and point you to the coffee.</p>
+              <p>Got kids? Classes run from 3 months through 5th grade. We’ll walk you to check-in, and they’re optional.</p>
+            </div>
+          </div>
+          <div class="panel" id="p-worship" role="tabpanel" aria-labelledby="t-worship">
+            <div class="frame frame--wide"><img src="../img/worship-side.webp" width="1280" height="960" alt="The Free State worship team singing, lyrics on the screen behind them" loading="lazy"></div>
+            <div>
+              <h3>10:00 · worship</h3>
+              <p>A few songs, led by people from the church. Sing along, listen, or just take it in. Lyrics are on the screen.</p>
+            </div>
+          </div>
+          <div class="panel" id="p-communion" role="tabpanel" aria-labelledby="t-communion">
+            <div class="frame"><img src="../img/prayer.webp" width="960" height="1280" alt="A young woman praying with her hands clasped during a Sunday service" loading="lazy"></div>
+            <div>
+              <h3>communion, every week</h3>
+              <p>We share communion every Sunday. Guests are always welcome to take part and never expected to.</p>
+              <p class="aside">An offering basket goes by once. It’s for members. Let it pass. Nobody’s watching.</p>
+            </div>
+          </div>
+          <div class="panel" id="p-message" role="tabpanel" aria-labelledby="t-message">
+            <div class="frame"><img src="../img/study.webp" width="960" height="1280" alt="A row of young men with open Bibles, taking notes" loading="lazy" style="object-position:35% 50%"></div>
+            <div>
+              <h3>the message</h3>
+              <p>A message straight from the Bible, aimed at real life on Monday. Bring a Bible if you have one. Pens and highlighters are popular.</p>
+              <p>Middle schoolers stay through communion, then head to their own class.</p>
+            </div>
+          </div>
+          <div class="panel" id="p-lawn" role="tabpanel" aria-labelledby="t-lawn">
+            <div class="frame"><img src="../img/coffee.webp" width="821" height="1280" alt="Two men holding coffee cups on the lawn after church" loading="lazy"></div>
+            <div>
+              <h3>11:30 · the lawn</h3>
+              <p>Service ends on time. Most people hang around outside with a coffee anyway. Stay as long as you like, or head out. Both are fine.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="stripe" aria-hidden="true"></div>
+
+  <section class="believe" id="believe">
+    <div class="wrap">
+      <p class="mission" aria-label="Love God. Love others. Change the world."><span>love god.</span><span>love others.</span><span>change the world.</span></p>
+      <div class="beliefs">
+        <div><h3>god is good</h3><p>And mighty to save.</p></div>
+        <div><h3>knowing god changes you</h3><p>A personal relationship with God brings real fulfillment and transforms our lives.</p></div>
+        <div><h3>saved by grace</h3><p>By the grace of God, through faith in Jesus, at baptism.</p></div>
+        <div><h3>life to the full</h3><p>Jesus came so that we might have life to the full (John 10:10).</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap band-grid">
+      <figure class="b1"><img src="../img/baptism-hug.webp" width="960" height="1280" alt="Four young women in a group hug, one wrapped in a towel after her baptism" loading="lazy"></figure>
+      <figure class="b2"><img src="../img/huddle.webp" width="960" height="1280" alt="A circle of church members, arms around each other, praying" loading="lazy"></figure>
+      <figure class="b3"><img src="../img/baptism-men.webp" width="960" height="1280" alt="Four young men grinning, the one in the middle in a striped towel after his baptism" loading="lazy"></figure>
+      <div class="band-copy">
+        <h2>when someone gets baptized, the whole room shows up.</h2>
+        <p>Wet hair, borrowed beach towels, and a lot of hugging. It never gets old.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="min" id="ministries">
+    <div class="wrap">
+      <span class="mono" style="color:var(--teal-deep)">find your people</span>
+      <h2>there’s a group for wherever you are.</h2>
+      <ul class="min-list">
+        <li><b>simple truth</b><span>Campus ministry at KU and Washburn.</span></li>
+        <li><b>family groups</b><span>Living rooms from Kansas City to Topeka, Manhattan, Junction City and Fort Riley.</span></li>
+        <li><b>youth &amp; family</b><span>Kids’ classes every Sunday, 3 months through 5th grade, and a place for teens.</span></li>
+        <li><b>hope</b><span>HOPE Youth Corps and HOPE Benevolence: serving Lawrence and beyond.</span></li>
+      </ul>
+      <div class="min-more"><span>young professionals</span><span>marrieds</span><span>diversity group</span></div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <h2>come this sunday.</h2>
+        <p class="lead">Tell us you’re coming and someone will meet you at the door. That’s all this is for.</p>
+        <div class="visit-facts">
+          <span>sundays 10:00–11:30 · doors 9:45</span>
+          <span>1020 kasold drive, lawrence, ks 66049</span>
+          <span><a href="https://maps.google.com/?q=1020+Kasold+Drive+Lawrence+KS+66049" rel="noopener">get directions</a> · (785) 813-1238</span>
+        </div>
+      </div>
+      <form class="card" id="visit-form" novalidate>
+        <label for="v-name">first name
+          <input type="text" id="v-name" name="name" autocomplete="given-name" maxlength="30" placeholder="so we know who to look for">
+        </label>
+        <label for="v-contact">phone or email <span style="font-weight:400">(optional)</span>
+          <input type="text" id="v-contact" name="contact" autocomplete="email" placeholder="only to say hi back">
+        </label>
+        <div class="checks">
+          <label for="v-kids"><input type="checkbox" id="v-kids" name="kids"> I’m bringing kids</label>
+          <label for="v-study"><input type="checkbox" id="v-study" name="study"> I’d like to study the Bible with someone</label>
+        </div>
+        <button class="pill pill--navy" type="submit">count me in</button>
+        <p class="demo">Preview build. This form isn’t connected yet; at launch it goes to the church office.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="stripe" aria-hidden="true"></div>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="brand" href="#top">free state<span>.</span></a><p>Love God. Love others. Change the world.</p></div>
+      <div><h4>sundays</h4><p>10:00–11:30 am<br>1020 Kasold Drive<br>Lawrence, KS 66049<br>(785) 813-1238<br>admin@freestatechurch.org</p></div>
+      <div><h4>online</h4><ul>
+        <li><a href="https://www.youtube.com/channel/UCIstVsZDvDTvwCsZxs2FQkQ" rel="noopener">youtube</a></li>
+        <li><a href="https://www.instagram.com/FreeStateChurch/" rel="noopener">instagram</a></li>
+        <li><a href="https://www.facebook.com/FreeStateChurch/" rel="noopener">facebook</a></li></ul></div>
+      <div><h4>give</h4><ul>
+        <li><a href="https://tithe.ly/give_new/www/#/tithely/give-one-time/35296" rel="noopener">give online</a></li>
+        <li><a href="https://tithe.ly/give?c=314371" rel="noopener">missions</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Free State Church · Lawrence, Kansas</span><span>Preview build · real Free State photos</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* sunday clock: without JS every step is shown in order; with JS it becomes tabs */
+  var clock = document.getElementById("clock");
+  var list = clock.querySelector(".clock-tabs");
+  var tabs = [].slice.call(clock.querySelectorAll(".tab"));
+  var panels = tabs.map(function(t){ return document.getElementById(t.getAttribute("aria-controls")); });
+  function pick(i, focus){
+    tabs.forEach(function(t, j){
+      var on = i === j;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      panels[j].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+  }
+  list.hidden = false;
+  clock.classList.add("is-live");
+  tabs.forEach(function(t, i){
+    t.addEventListener("click", function(){ pick(i); });
+    t.addEventListener("keydown", function(e){
+      var k = e.key, n = tabs.length;
+      if (k === "ArrowDown" || k === "ArrowRight"){ e.preventDefault(); pick((i + 1) % n, true); }
+      if (k === "ArrowUp" || k === "ArrowLeft"){ e.preventDefault(); pick((i - 1 + n) % n, true); }
+    });
+  });
+  pick(0);
+
+  /* visit form: demo-honest confirmation */
+  var form = document.getElementById("visit-form");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("v-name").value.trim().slice(0, 30);
+    var kids = document.getElementById("v-kids").checked;
+    var study = document.getElementById("v-study").checked;
+    var msg = document.createElement("p");
+    msg.className = "done";
+    msg.textContent = (name ? "see you sunday, " + name + "." : "see you sunday.") +
+      (kids ? " we’ll have the kids’ check-in ready." : "") +
+      (study ? " someone will reach out about a bible study." : "");
+    var note = document.createElement("p");
+    note.className = "demo";
+    note.textContent = "Preview build: nothing was sent. At launch this goes to the church office.";
+    form.replaceChildren(msg, note);
+  });
+})();
+</script>
+</body>
+</html>

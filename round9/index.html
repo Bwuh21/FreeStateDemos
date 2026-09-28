@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Free State For Everyone</title>
+<meta name="description" content="Free State Church in Lawrence, Kansas. Sundays 10:00–11:30 at 1020 Kasold Drive. Plan a visit, watch the latest message, or say hello.">
+<meta name="theme-color" content="#f4fafa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..800,100&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap" rel="stylesheet">
+<style>
+/* Round 9: built from the team's church-site review (Telegram, 2026-09-27).
+   Light and bubbly, photo-forward, three actions always in reach, gospel + logistics on screen one. */
+:root{
+  color-scheme: light;
+  --paper: #fbfdfd;
+  --wash: #e9f6f4;
+  --wash-2: #f3f8fb;
+  --navy: #232d5c;
+  --navy-soft: #3b4677;
+  --teal: #30a595;
+  --teal-deep: #1d7a6e;
+  --ink: #1f2747;
+  --ink-soft: #4a5374;
+  --line: rgba(35,45,92,0.12);
+  --sun: #ffd98a;
+
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --f-body: "Nunito Sans", system-ui, -apple-system, sans-serif;
+
+  --t-sm: clamp(0.86rem, 0.83rem + 0.12vw, 0.94rem);
+  --t-base: clamp(1.02rem, 0.98rem + 0.2vw, 1.14rem);
+  --t-lede: clamp(1.14rem, 1.06rem + 0.4vw, 1.38rem);
+  --t-h3: clamp(1.3rem, 1.16rem + 0.6vw, 1.7rem);
+  --t-h2: clamp(1.9rem, 1.5rem + 1.9vw, 3.1rem);
+  --t-hero: clamp(2.6rem, 1.7rem + 4.4vw, 5.4rem);
+
+  --r: 28px;
+  --r-sm: 16px;
+  --bounce: cubic-bezier(.34,1.45,.64,1);
+  --shadow: 0 2px 6px rgba(35,45,92,.07), 0 12px 28px rgba(35,45,92,.09);
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *,*::before,*::after{ transition-duration:0.01ms !important; animation:none !important; } }
+body{ background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:var(--t-base); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+img{ max-width:100%; display:block; }
+h1,h2,h3{ font-family:var(--f-display); font-variation-settings:"SOFT" 100, "opsz" 96; font-weight:700; color:var(--navy); line-height:1.06; letter-spacing:-0.015em; text-wrap:balance; }
+p{ text-wrap:pretty; }
+a{ color:inherit; }
+:focus-visible{ outline:3px solid var(--teal); outline-offset:3px; border-radius:10px; }
+section[id]{ scroll-margin-top:5.5rem; }
+.wrap{ width:min(100% - 2.5rem, 72rem); margin-inline:auto; }
+@media (max-width:600px){ .wrap{ width:min(100% - 2rem, 72rem); } }
+.kick{ display:inline-block; font-weight:800; font-size:var(--t-sm); color:var(--teal-deep); background:var(--wash); border-radius:999px; padding:0.3em 0.9em; margin-bottom:1rem; }
+
+/* buttons: round, big enough for a thumb */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:0.55em; min-height:3.1rem; padding:0.8em 1.45em; border-radius:999px; border:0; cursor:pointer; font:inherit; font-weight:800; text-decoration:none; line-height:1.1; transition:transform 240ms var(--bounce), box-shadow 240ms var(--bounce), background 200ms ease; }
+.btn:hover{ transform:translateY(-3px); }
+.btn svg{ width:1.2em; height:1.2em; flex:none; }
+.btn--visit{ background:var(--navy); color:#fff; box-shadow:var(--shadow); }
+.btn--watch{ background:var(--teal); color:#fff; box-shadow:var(--shadow); }
+.btn--connect{ background:#fff; color:var(--navy); box-shadow:inset 0 0 0 2px var(--navy); }
+.btn--connect:hover{ background:var(--wash); }
+
+.preview-strip{ background:var(--navy); color:#fff; text-align:center; font-size:0.8rem; font-weight:700; padding:0.45rem 1rem; }
+
+/* ============ nav ============ */
+.nav{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:40; background:rgba(251,253,253,0.9); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.nav .wrap{ display:flex; align-items:center; gap:1.5rem; padding-block:0.7rem; }
+.logo{ display:flex; align-items:center; gap:0.55rem; text-decoration:none; font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-weight:800; font-size:1.25rem; color:var(--navy); }
+.logo i{ width:2rem; height:2rem; border-radius:50%; background:var(--teal); display:grid; place-items:center; }
+.logo i::after{ content:""; width:0.7rem; height:0.7rem; border-radius:50%; background:#fff; }
+.nav-links{ display:flex; gap:1.3rem; margin-left:auto; font-weight:700; font-size:var(--t-sm); }
+.nav-links a{ text-decoration:none; color:var(--ink-soft); }
+.nav-links a:hover{ color:var(--navy); text-decoration:underline; text-decoration-color:var(--teal); text-decoration-thickness:2px; text-underline-offset:5px; }
+.nav .btn{ min-height:2.6rem; padding:0.55em 1.15em; font-size:var(--t-sm); }
+@media (max-width:900px){ .nav-links{ display:none; } .nav .btn{ margin-left:auto; } }
+
+/* ============ hero: faded photo, the whole argument in one screen ============ */
+.hero{ position:relative; isolation:isolate; padding-block:clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem); overflow:clip; }
+.hero-bg{ position:absolute; inset:0; z-index:-1; }
+.hero-bg img{ width:100%; height:100%; object-fit:cover; object-position:50% 40%; opacity:0.5; filter:saturate(0.9); }
+.hero-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(251,253,253,0.97) 0%, rgba(251,253,253,0.9) 42%, rgba(233,246,244,0.55) 75%, rgba(233,246,244,0.35) 100%); }
+.hero h1{ font-size:var(--t-hero); max-width:13ch; }
+.hero h1 em{ font-style:italic; color:var(--teal-deep); }
+.hero .lede{ margin-top:1.25rem; font-size:var(--t-lede); color:var(--ink-soft); max-width:36ch; }
+.three{ margin-top:2rem; display:flex; flex-wrap:wrap; gap:0.75rem; }
+.when{ margin-top:2.25rem; display:inline-flex; flex-wrap:wrap; gap:0.4rem 1.4rem; background:#fff; border-radius:var(--r-sm); padding:0.9rem 1.25rem; box-shadow:var(--shadow); font-weight:700; }
+.when span{ display:inline-flex; align-items:center; gap:0.45rem; }
+.when svg{ width:1.15em; height:1.15em; color:var(--teal-deep); flex:none; }
+@media (max-width:600px){ .three .btn{ flex:1 1 100%; } .when{ display:flex; flex-direction:column; } }
+
+/* ============ this sunday: times + map card ============ */
+.sunday{ padding-block:clamp(3rem, 6vw, 5rem); }
+.sunday-grid{ display:grid; grid-template-columns:5fr 6fr; gap:1.25rem; }
+.card{ background:#fff; border-radius:var(--r); box-shadow:var(--shadow); padding:clamp(1.5rem, 3vw, 2.25rem); }
+.times h2{ font-size:var(--t-h2); }
+.times dl{ margin-top:1.5rem; display:grid; gap:1rem; }
+.times dt{ font-weight:800; color:var(--teal-deep); font-size:var(--t-sm); }
+.times dd{ margin:0; color:var(--ink-soft); }
+.map{ position:relative; overflow:hidden; padding:0; display:flex; flex-direction:column; min-height:22rem; background:var(--wash); }
+.map svg.streets{ position:absolute; inset:0; width:100%; height:100%; }
+.map .pin{ position:absolute; left:52%; top:40%; transform:translate(-50%,-100%); display:grid; justify-items:center; gap:0.3rem; }
+.map .pin b{ background:var(--navy); color:#fff; border-radius:999px; padding:0.45em 1em; font-size:var(--t-sm); white-space:nowrap; box-shadow:var(--shadow); }
+.map .pin i{ width:1.1rem; height:1.1rem; border-radius:50%; background:var(--teal); box-shadow:0 0 0 6px rgba(48,165,149,0.25); }
+.map-foot{ position:relative; margin-top:auto; background:#fff; padding:1.1rem 1.4rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.75rem; }
+.map-foot p{ font-weight:700; }
+.map-foot small{ display:block; font-weight:600; color:var(--ink-soft); }
+.map-foot .btn{ min-height:2.7rem; padding:0.6em 1.2em; }
+@media (max-width:820px){ .sunday-grid{ grid-template-columns:1fr; } .map{ min-height:18rem; } }
+
+/* ============ the message + the gospel, side by side ============ */
+.message{ background:var(--wash); padding-block:clamp(3.5rem, 7vw, 6rem); border-radius:var(--r) var(--r) 0 0; }
+.message-head{ max-width:44rem; }
+.message-head h2{ font-size:var(--t-h2); }
+.message-grid{ margin-top:2.25rem; display:grid; grid-template-columns:7fr 5fr; gap:clamp(1.25rem, 3vw, 2.5rem); align-items:start; }
+.video{ position:relative; display:block; border-radius:var(--r); overflow:hidden; aspect-ratio:16/9; box-shadow:var(--shadow); text-decoration:none; background:var(--navy); }
+.video img{ width:100%; height:100%; object-fit:cover; opacity:0.78; transition:transform 500ms ease, opacity 300ms ease; }
+.video:hover img{ transform:scale(1.03); opacity:0.7; }
+.video .play{ position:absolute; left:50%; top:50%; width:5rem; height:5rem; margin:-2.5rem 0 0 -2.5rem; border-radius:50%; background:#fff; display:grid; place-items:center; box-shadow:0 10px 30px rgba(0,0,0,.25); transition:transform 260ms var(--bounce); }
+.video:hover .play{ transform:scale(1.08); }
+.video .play svg{ width:1.8rem; height:1.8rem; margin-left:0.25rem; color:var(--teal-deep); }
+.video .cap{ position:absolute; left:1rem; bottom:1rem; right:1rem; display:flex; justify-content:space-between; gap:1rem; color:#fff; font-weight:800; text-shadow:0 1px 8px rgba(0,0,0,.45); }
+.video-note{ margin-top:0.9rem; font-size:var(--t-sm); color:var(--ink-soft); }
+.gospel{ list-style:none; padding:0; display:grid; gap:0.8rem; }
+.gospel li{ background:#fff; border-radius:var(--r-sm); padding:1rem 1.2rem 1.1rem; box-shadow:0 1px 3px rgba(35,45,92,.06); }
+.gospel b{ display:block; font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-size:1.2rem; color:var(--navy); line-height:1.2; }
+.gospel span{ color:var(--ink-soft); font-size:var(--t-sm); }
+@media (max-width:860px){ .message-grid{ grid-template-columns:1fr; } }
+
+/* ============ plan a visit + the photo strip ============ */
+.visit{ padding-block:clamp(3.5rem, 7vw, 6rem) 0; }
+.visit-grid{ display:grid; grid-template-columns:5fr 7fr; gap:clamp(1.5rem, 4vw, 4rem); align-items:start; }
+.visit h2{ font-size:var(--t-h2); }
+.visit .lede{ margin-top:1rem; font-size:var(--t-lede); color:var(--ink-soft); }
+.steps{ list-style:none; padding:0; display:grid; grid-template-columns:repeat(2, 1fr); gap:0.9rem; }
+.steps li{ background:var(--wash-2); border-radius:var(--r-sm); padding:1.1rem 1.25rem 1.2rem; }
+.steps b{ display:block; font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-size:1.2rem; color:var(--navy); margin-bottom:0.25rem; }
+.steps p{ color:var(--ink-soft); font-size:var(--t-sm); }
+@media (max-width:860px){ .visit-grid{ grid-template-columns:1fr; } }
+@media (max-width:520px){ .steps{ grid-template-columns:1fr; } }
+
+.reel{ margin-top:clamp(2.5rem, 5vw, 4rem); overflow:hidden; padding-block:0.75rem 1.5rem; }
+.reel ul{ list-style:none; padding:0; display:flex; gap:1rem; width:max-content; animation:drift 60s linear infinite; }
+.reel:hover ul{ animation-play-state:paused; }
+.reel li{ width:clamp(11rem, 22vw, 16rem); aspect-ratio:4/5; border-radius:var(--r-sm); overflow:hidden; flex:none; box-shadow:var(--shadow); }
+.reel li:nth-child(odd){ transform:rotate(-1.5deg); }
+.reel li:nth-child(even){ transform:rotate(1.5deg) translateY(0.75rem); }
+.reel img{ width:100%; height:100%; object-fit:cover; }
+@keyframes drift{ to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .reel{ overflow-x:auto; } }
+
+/* ============ beliefs, with the baptism photo ============ */
+.believe{ padding-block:clamp(3.5rem, 7vw, 6rem); }
+.believe-grid{ display:grid; grid-template-columns:5fr 7fr; gap:clamp(1.5rem, 4vw, 4rem); align-items:center; }
+.believe figure{ border-radius:var(--r); overflow:hidden; aspect-ratio:4/5; box-shadow:var(--shadow); transform:rotate(-1.5deg); }
+.believe figure img{ width:100%; height:100%; object-fit:cover; }
+.believe h2{ font-size:var(--t-h2); }
+.believe .mission{ margin-top:0.75rem; font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-size:var(--t-h3); color:var(--teal-deep); }
+.believe dl{ margin-top:1.75rem; display:grid; gap:1.1rem; }
+.believe dt{ font-weight:800; color:var(--navy); }
+.believe dd{ margin:0.15rem 0 0; color:var(--ink-soft); max-width:52ch; }
+@media (max-width:820px){ .believe-grid{ grid-template-columns:1fr; } .believe figure{ max-width:20rem; } }
+
+/* ============ life at free state: cradle to grave, one line ============ */
+.life{ background:var(--wash-2); padding-block:clamp(3.5rem, 7vw, 6rem); }
+.life h2{ font-size:var(--t-h2); max-width:18ch; }
+.life > .wrap > p{ margin-top:0.9rem; color:var(--ink-soft); max-width:52ch; }
+.stages{ list-style:none; padding:0; margin-top:2.25rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(11.5rem, 1fr)); gap:0.9rem; }
+.stages li{ background:#fff; border-radius:var(--r-sm); padding:1.1rem 1.2rem 1.25rem; border-top:5px solid var(--teal); }
+.stages li:nth-child(even){ border-top-color:var(--navy); }
+.stages small{ display:block; font-weight:800; font-size:0.78rem; color:var(--teal-deep); text-transform:uppercase; letter-spacing:0.08em; }
+.stages b{ display:block; font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-size:1.2rem; color:var(--navy); margin-block:0.2rem 0.25rem; }
+.stages span{ font-size:var(--t-sm); color:var(--ink-soft); }
+
+/* ============ connect: small on purpose ============ */
+.connect{ padding-block:clamp(3.5rem, 7vw, 6rem); }
+.connect-grid{ display:grid; grid-template-columns:5fr 6fr; gap:clamp(1.5rem, 4vw, 4rem); align-items:start; }
+.connect h2{ font-size:var(--t-h2); }
+.connect .lede{ margin-top:1rem; font-size:var(--t-lede); color:var(--ink-soft); }
+.connect .who{ margin-top:1.5rem; display:flex; align-items:center; gap:0.9rem; }
+.connect .who img{ width:4rem; height:4rem; border-radius:50%; object-fit:cover; object-position:50% 25%; box-shadow:0 0 0 4px var(--wash); }
+.connect .who p{ font-size:var(--t-sm); color:var(--ink-soft); }
+form.card{ display:grid; gap:1.1rem; }
+form label, form legend{ font-weight:800; font-size:var(--t-sm); color:var(--navy); }
+form label{ display:grid; gap:0.4rem; }
+form .opt{ font-weight:600; color:var(--ink-soft); }
+form input[type=text]{ font:inherit; padding:0.8em 1em; border-radius:14px; border:2px solid var(--line); background:var(--paper); color:var(--ink); transition:border-color 200ms ease, box-shadow 200ms ease; }
+form input[type=text]:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 4px rgba(48,165,149,0.2); }
+fieldset{ border:0; padding:0; }
+.chips{ margin-top:0.55rem; display:flex; flex-wrap:wrap; gap:0.5rem; }
+.chips input{ position:absolute; opacity:0; pointer-events:none; }
+.chips label{ display:inline-block; cursor:pointer; font-weight:700; padding:0.55em 1em; border-radius:999px; background:var(--wash-2); color:var(--ink-soft); transition:background 180ms ease, color 180ms ease, transform 220ms var(--bounce); }
+.chips label:hover{ transform:translateY(-2px); }
+.chips input:checked + label{ background:var(--teal); color:#fff; }
+.chips input:focus-visible + label{ outline:3px solid var(--teal); outline-offset:2px; }
+form .btn{ justify-self:start; }
+.demo{ font-size:0.8rem; color:var(--ink-soft); }
+.done{ font-family:var(--f-display); font-variation-settings:"SOFT" 100; font-size:var(--t-h3); color:var(--navy); line-height:1.2; }
+@media (max-width:860px){ .connect-grid{ grid-template-columns:1fr; } }
+
+/* ============ footer: giving lives here, quietly ============ */
+.foot{ background:var(--navy); color:#d9def0; padding-block:3.5rem calc(2rem + env(safe-area-inset-bottom, 0px)); border-radius:var(--r) var(--r) 0 0; }
+.foot-grid{ display:grid; grid-template-columns:5fr 3fr 3fr 3fr; gap:2rem; }
+.foot .logo{ color:#fff; margin-bottom:0.6rem; }
+.foot h4{ font-size:var(--t-sm); color:#8fd9ce; margin-bottom:0.6rem; }
+.foot ul{ list-style:none; padding:0; display:grid; gap:0.4rem; }
+.foot a{ color:#fff; text-decoration:none; }
+.foot a:hover{ text-decoration:underline; text-decoration-color:var(--teal); text-underline-offset:4px; }
+.foot-base{ margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid rgba(255,255,255,0.14); display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.8rem; }
+@media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:480px){ .foot-grid{ grid-template-columns:1fr; } }
+
+/* ============ phone: the three actions ride under your thumb ============ */
+.thumb{ display:none; }
+@media (max-width:700px){
+  .thumb{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0.4rem; position:fixed; left:0; right:0; bottom:0; z-index:50;
+    padding:0.5rem 0.6rem calc(0.5rem + env(safe-area-inset-bottom, 0px)); background:rgba(251,253,253,0.94); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-top:1px solid var(--line); }
+  .thumb a{ display:grid; justify-items:center; gap:0.1rem; text-decoration:none; font-weight:800; font-size:0.78rem; color:var(--navy); padding:0.45rem 0.2rem; border-radius:14px; }
+  .thumb a:first-child{ background:var(--navy); color:#fff; }
+  .thumb svg{ width:1.3rem; height:1.3rem; }
+  body{ padding-bottom:4.6rem; }
+  .nav .btn{ display:none; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="preview-strip">Preview for Free State staff · not the live site · photos shown with the church family’s permission pending</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Free State</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#visit">Plan a visit</a>
+      <a href="#believe">Beliefs</a>
+      <a href="#message">Sermons</a>
+      <a href="#life">Ministries</a>
+      <a href="#connect">Connect</a>
+    </nav>
+    <a class="btn btn--visit" href="#visit">Plan a visit</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ hero ============ -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"><img src="../img/worship-wide.webp" width="1280" height="960" alt="" fetchpriority="high"></div>
+    <div class="wrap">
+      <span class="kick">Free State Church · Lawrence, Kansas</span>
+      <h1>A church for <em>everyone</em> who wants to follow Jesus.</h1>
+      <p class="lede">Students, families, lifers, and people who walked in last month. We read the Bible, sing, share communion every week, and figure out how to live it together.</p>
+      <div class="three">
+        <a class="btn btn--visit" href="#visit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Plan a visit</a>
+        <a class="btn btn--watch" href="#message"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>Watch the latest message</a>
+        <a class="btn btn--connect" href="#connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>Say hello</a>
+      </div>
+      <p class="when">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Sundays 10:00–11:30</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>1020 Kasold Drive</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 13a2.5 2.5 0 1 0 0-5M3 20c0-3 2.7-5 6-5s6 2 6 5M16 15c2.5 0 5 1.5 5 4"/></svg>Kids’ classes, 3 months–5th grade</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ this sunday ============ -->
+  <section class="sunday" aria-labelledby="sunday-h">
+    <div class="wrap sunday-grid">
+      <div class="card times">
+        <span class="kick">This Sunday</span>
+        <h2 id="sunday-h">Doors at 9:45. Coffee’s on.</h2>
+        <dl>
+          <div><dt>When</dt><dd>Every Sunday, 10:00 to 11:30 am. It ends on time.</dd></div>
+          <div><dt>Where</dt><dd>1020 Kasold Drive, Lawrence, KS 66049. Free parking right outside.</dd></div>
+          <div><dt>Questions first?</dt><dd>Call the office at (785) 813-1238, or <a href="#connect">send us a note</a>.</dd></div>
+        </dl>
+      </div>
+      <div class="card map">
+        <!-- ponytail: drawn map, since artifacts can't embed Google Maps; swap for a real embed at launch -->
+        <svg class="streets" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="600" height="360" fill="#e9f6f4"/>
+          <path d="M0 250 C160 240 300 262 600 236" stroke="#fff" stroke-width="22" fill="none"/>
+          <path d="M318 0 L306 360" stroke="#fff" stroke-width="26" fill="none"/>
+          <path d="M0 90 L600 110" stroke="#fff" stroke-width="12" fill="none"/>
+          <path d="M120 0 L140 360 M470 0 L486 360" stroke="#fff" stroke-width="10" fill="none"/>
+          <rect x="170" y="130" width="95" height="70" rx="14" fill="#d5ece8"/>
+          <rect x="360" y="140" width="80" height="60" rx="14" fill="#cfe6e1"/>
+          <circle cx="520" cy="60" r="34" fill="#d5ece8"/>
+          <text x="330" y="40" font-family="Nunito Sans, sans-serif" font-size="13" font-weight="800" fill="#4a5374" transform="rotate(88 330 40)">KASOLD DR</text>
+          <text x="180" y="236" font-family="Nunito Sans, sans-serif" font-size="13" font-weight="800" fill="#4a5374">W 6TH ST</text>
+        </svg>
+        <div class="pin"><b>Free State Church</b><i></i></div>
+        <div class="map-foot">
+          <p>1020 Kasold Drive<small>Lawrence, Kansas 66049</small></p>
+          <a class="btn btn--visit" href="https://maps.google.com/?q=1020+Kasold+Drive+Lawrence+KS+66049" rel="noopener">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ the message + the gospel ============ -->
+  <section class="message" id="message">
+    <div class="wrap">
+      <div class="message-head">
+        <span class="kick">Sermons</span>
+        <h2>Start with this week’s message, and what we believe.</h2>
+      </div>
+      <div class="message-grid">
+        <div>
+          <a class="video" href="https://www.youtube.com/channel/UCIstVsZDvDTvwCsZxs2FQkQ" rel="noopener" aria-label="Watch the latest Free State message on YouTube">
+            <img src="../img/worship-side.webp" width="1280" height="960" alt="" loading="lazy">
+            <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></span>
+            <span class="cap"><span>Latest message</span><span>Sunday</span></span>
+          </a>
+          <p class="video-note">Every Sunday message goes up on YouTube, newest first. Press play whenever you’re ready. Nothing starts on its own.</p>
+        </div>
+        <ul class="gospel" aria-label="The gospel in plain words">
+          <li><b>God made you and loves you.</b><span>He is good, and he is mighty to save.</span></li>
+          <li><b>We all walk away from him.</b><span>Sin breaks our relationship with God, and we can’t fix it on our own.</span></li>
+          <li><b>Jesus came to bring us back.</b><span>He died for our sins and rose again. Salvation is a gift of grace, received through faith, at baptism.</span></li>
+          <li><b>Then we follow him, together.</b><span>Life to the full (John 10:10), in a church family that helps each other keep going.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ plan a visit ============ -->
+  <section class="visit" id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <span class="kick">Plan a visit</span>
+        <h2>What your first Sunday feels like.</h2>
+        <p class="lede">No visitor section, no standing up to introduce yourself. Come as you are. Shorts are fine.</p>
+      </div>
+      <ul class="steps">
+        <li><b>Walking in</b><p>Someone at the door will say hi and point you to the coffee. Sit anywhere.</p></li>
+        <li><b>Your kids</b><p>Classes from 3 months through 5th grade. We’ll walk you to check-in. They’re optional.</p></li>
+        <li><b>The service</b><p>A few songs, communion together, then a message straight from the Bible. Guests are welcome at communion and never expected to take it.</p></li>
+        <li><b>After</b><p>Done by 11:30. Most people hang out on the lawn. Stay or head out, both are fine.</p></li>
+      </ul>
+    </div>
+    <div class="reel" aria-label="Photos from Sundays at Free State">
+      <ul>
+        <li><img src="../img/lobby.webp" width="960" height="1280" alt="Two women smiling in the Free State lobby" loading="lazy" style="object-position:50% 30%"></li>
+        <li><img src="../img/coffee.webp" width="821" height="1280" alt="Two men with coffee on the lawn after church" loading="lazy"></li>
+        <li><img src="../img/huddle.webp" width="960" height="1280" alt="A circle of church members praying together" loading="lazy"></li>
+        <li><img src="../img/study.webp" width="960" height="1280" alt="A row of young men with open Bibles, taking notes" loading="lazy"></li>
+        <li><img src="../img/baptism-hug.webp" width="960" height="1280" alt="Four young women hugging after a baptism" loading="lazy"></li>
+        <li><img src="../img/prayer.webp" width="960" height="1280" alt="A young woman praying during a Sunday service" loading="lazy"></li>
+        <!-- second copy makes the loop seamless -->
+        <li aria-hidden="true"><img src="../img/lobby.webp" width="960" height="1280" alt="" loading="lazy" style="object-position:50% 30%"></li>
+        <li aria-hidden="true"><img src="../img/coffee.webp" width="821" height="1280" alt="" loading="lazy"></li>
+        <li aria-hidden="true"><img src="../img/huddle.webp" width="960" height="1280" alt="" loading="lazy"></li>
+        <li aria-hidden="true"><img src="../img/study.webp" width="960" height="1280" alt="" loading="lazy"></li>
+        <li aria-hidden="true"><img src="../img/baptism-hug.webp" width="960" height="1280" alt="" loading="lazy"></li>
+        <li aria-hidden="true"><img src="../img/prayer.webp" width="960" height="1280" alt="" loading="lazy"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ beliefs ============ -->
+  <section class="believe" id="believe">
+    <div class="wrap believe-grid">
+      <figure><img src="../img/baptism-men.webp" width="960" height="1280" alt="Four young men grinning, the one in the middle in a striped towel right after his baptism" loading="lazy"></figure>
+      <div>
+        <span class="kick">What we believe</span>
+        <h2>The Bible, in ordinary words.</h2>
+        <p class="mission">Love God. Love others. Change the world.</p>
+        <dl>
+          <div><dt>God is good, and mighty to save.</dt><dd>Not distant, not disappointed. Able to redeem the parts of your story that feel unfixable.</dd></div>
+          <div><dt>Knowing God changes people.</dt><dd>A real relationship with him brings fulfillment and changes us from the inside out.</dd></div>
+          <div><dt>Grace, through faith in Jesus, at baptism.</dt><dd>Salvation is received, never earned. We’d love to open the Bible and show you where that comes from.</dd></div>
+          <div><dt>Life to the full, starting now.</dt><dd>Following Jesus is about this life too, not only the next one.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ life at free state ============ -->
+  <section class="life" id="life">
+    <div class="wrap">
+      <span class="kick">Life at Free State</span>
+      <h2>A place for every age and every season.</h2>
+      <p>Sunday is the front door. Most of church life happens in smaller rooms through the week.</p>
+      <ul class="stages">
+        <li><small>Kids</small><b>Youth &amp; Family</b><span>Sunday classes from 3 months through 5th grade, and a place for teens.</span></li>
+        <li><small>Teens</small><b>HOPE Youth Corps</b><span>Serving Lawrence and beyond.</span></li>
+        <li><small>College</small><b>Simple Truth</b><span>Campus ministry at KU and Washburn.</span></li>
+        <li><small>Working</small><b>Young Professionals</b><span>For life after graduation.</span></li>
+        <li><small>Married</small><b>Marrieds</b><span>Building marriages that last.</span></li>
+        <li><small>Everyone</small><b>Family Groups</b><span>Living rooms from Kansas City to Topeka, Manhattan, Junction City and Fort Riley.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ connect ============ -->
+  <section class="connect" id="connect">
+    <div class="wrap connect-grid">
+      <div>
+        <span class="kick">Connect</span>
+        <h2>Say hello. A real person will write back.</h2>
+        <p class="lede">Just enough to reach you. The rest happens over coffee, or on a Sunday, or wherever suits you.</p>
+        <div class="who">
+          <img src="../img/lobby.webp" width="960" height="1280" alt="" loading="lazy">
+          <p>Notes go to the church office, and someone replies, usually the same day.</p>
+        </div>
+      </div>
+      <form class="card" id="hello" novalidate>
+        <label for="c-name">Your name
+          <input type="text" id="c-name" name="name" autocomplete="name" maxlength="40" placeholder="First name is fine">
+        </label>
+        <label for="c-reach">Email or phone <span class="opt">(one is enough)</span>
+          <input type="text" id="c-reach" name="reach" autocomplete="email" maxlength="80" placeholder="So we can say hi back">
+        </label>
+        <fieldset>
+          <legend>Where are you at? <span class="opt">(optional)</span></legend>
+          <div class="chips">
+            <input type="radio" name="stage" id="s-first" value="first visit"><label for="s-first">Thinking about a first visit</label>
+            <input type="radio" name="stage" id="s-new" value="new in town"><label for="s-new">New in town</label>
+            <input type="radio" name="stage" id="s-coming" value="already coming"><label for="s-coming">Already coming</label>
+            <input type="radio" name="stage" id="s-other" value="other"><label for="s-other">Something else</label>
+          </div>
+        </fieldset>
+        <label for="c-note">Anything else? <span class="opt">(optional)</span>
+          <input type="text" id="c-note" name="note" maxlength="140" placeholder="One line is plenty">
+        </label>
+        <button class="btn btn--watch" type="submit">Send hello</button>
+        <p class="demo">Preview build. This form isn’t connected yet. At launch it goes to the church office.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="logo" href="#top"><i aria-hidden="true"></i>Free State</a><p>Love God. Love others. Change the world.</p></div>
+      <div><h4>Sundays</h4><p>10:00–11:30 am<br>1020 Kasold Drive<br>Lawrence, KS 66049<br>(785) 813-1238<br>admin@freestatechurch.org</p></div>
+      <div><h4>Watch &amp; follow</h4><ul>
+        <li><a href="https://www.youtube.com/channel/UCIstVsZDvDTvwCsZxs2FQkQ" rel="noopener">YouTube</a></li>
+        <li><a href="https://www.instagram.com/FreeStateChurch/" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/FreeStateChurch/" rel="noopener">Facebook</a></li></ul></div>
+      <div><h4>Give</h4><ul>
+        <li><a href="https://tithe.ly/give_new/www/#/tithely/give-one-time/35296" rel="noopener">Give online</a></li>
+        <li><a href="https://tithe.ly/give?c=314371" rel="noopener">Missions</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Free State Church · Lawrence, Kansas</span><span>Preview build · real Free State photos</span></div>
+  </div>
+</footer>
+
+<nav class="thumb" aria-label="Quick actions">
+  <a href="#visit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Plan a visit</a>
+  <a href="#message"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>Watch</a>
+  <a href="#connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>Say hello</a>
+</nav>
+
+<script>
+(function(){
+  var form = document.getElementById("hello");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("c-name").value.trim().slice(0, 40);
+    var msg = document.createElement("p");
+    msg.className = "done";
+    msg.textContent = name ? "Thanks, " + name + ". Someone from Free State will reach out soon." : "Thanks. Someone from Free State will reach out soon.";
+    var note = document.createElement("p");
+    note.className = "demo";
+    note.textContent = "Preview build: nothing was sent. At launch this goes to the church office.";
+    form.replaceChildren(msg, note);
+  });
+})();
+</script>
+
+</body>
+</html>
